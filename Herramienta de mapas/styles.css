@@ -1,0 +1,40 @@
+
+html {
+    font-family: 'Roboto', sans-serif;
+    background: black;
+    color: white;
+}
+
+.fila {
+    display:inline-block;
+    clear:both;
+    float: left;
+    margin-bottom: -4px;
+}
+.fila div {
+    float: left;
+    width:24px;
+    height: 24px;
+    border: solid 1px black;
+    background-color: white;
+}
+.tile-1 {
+    background-image: url(tiles/piso1.bmp);
+    background-size: cover;
+}
+.tile-2 {
+    background-image: url(tiles/piso2.bmp);
+    background-size: cover;
+}
+.tile-3 {
+    background-image: url(tiles/piramide1.bmp);
+    background-size: cover;
+}
+.tile-4 {
+    background-image: url(tiles/piramide2.bmp);
+    background-size: cover;
+}
+.tile-5 {
+    background-image: url(tiles/piramide3.bmp);
+    background-size: cover;
+}
