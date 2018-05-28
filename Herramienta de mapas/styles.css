@@ -3,21 +3,83 @@ html {
     font-family: 'Roboto', sans-serif;
     background: black;
     color: white;
+    image-rendering: pixelated;
 }
-
+body {
+}
+.gridContainer {
+    max-width: 416px;
+    overflow: auto;
+}
+.grid {
+    display: inline-block;
+}
 .fila {
-    display:inline-block;
-    clear:both;
-    float: left;
+    display: inline-block;
+    clear: both;
+    padding: 0;
+    white-space: nowrap;
     margin-bottom: -4px;
+    height: 26px;
+    min-width: 416px;
+    overflow: hidden;
 }
 .fila div {
-    float: left;
-    width:24px;
+    display: inline-block;
+    white-space: nowrap;
+    width: 24px;
     height: 24px;
-    border: solid 1px black;
+    margin: 1px;
     background-color: white;
 }
+.outputBox {
+    clear: both;
+    float: left;
+}
+#theOutPut {
+    max-width: 100%;
+    word-break: break-all;
+    clear: both;
+    float: left;
+}
+/*-------------------modules ---------*/
+.moduleHeader {
+    font-size: 1em;
+    width: 80vw;
+    border-top: 1px solid white;
+    padding-top: 14px;
+}
+.tile {
+    float:left;
+    width: 26px;
+    margin-right: 1px;
+
+}
+.tile img {
+    width: 100%;
+}
+.mapInfo {
+    display: inline-block;
+    width: 100%;
+    clear: both;
+}
+.mapInfo p{
+    margin-right: 10px;
+    float:left;
+}
+/*-----------------------TOOLS--------*/
+button {
+    background: transparent;
+    border: none;
+    text-align: center;
+}
+.icon {
+    margin: 0;
+    font-size: 2em;
+    padding: 0;
+    color: white;
+}
+/***************************TILE IMAGES*/
 .tile-1 {
     background-image: url(tiles/piso1.bmp);
     background-size: cover;
@@ -36,5 +98,13 @@ html {
 }
 .tile-5 {
     background-image: url(tiles/piramide3.bmp);
+    background-size: cover;
+}
+.tile-6 {
+    background-image: url(tiles/palmera1.bmp);
+    background-size: cover;
+}
+.tile-7 {
+    background-image: url(tiles/palmera2.bmp);
     background-size: cover;
 }

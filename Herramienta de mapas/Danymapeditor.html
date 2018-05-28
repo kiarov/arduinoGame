@@ -4,6 +4,7 @@
         <title>Dany map editor</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="styles.css">
+        <link rel="stylesheet" type="text/css" href="css/fontello.css">
         <script src="lodash.js"></script>
         <script src="actions.js"></script>
     </head>
@@ -11,11 +12,46 @@
             <div class="title">
                 <h1>MICRODANY MAP EDITOR</h1>
             </div>
-             <div class="grid">
+            <div class="mapInfo">
+                <p id="length"></p><p> | </p>
+                <p id="selected">Selected Tile: none</p>
+            </div>
+            <div class="gridContainer">
+                <div class="grid"></div>
+            </div>
+             <div class="gridTools">
+                 <button type="button" class="addButton" onclick="addColumn()"><p class="icon icon-plus-squared"></p></button>
+                 <button type="button" class="addButton" onclick="removeColumn()"><p class="icon icon-minus-squared"></p></button>
+                 <button type="button" class="addButton" onclick="removeColumn()"><p class="icon icon-export"></p></button>
              </div>
-             <div class="theOutPut">
-                
+             <div class="tileSet">
+                 <h2 class="moduleHeader">TILESET</h2>
+                 <div class="tile">
+                     <img src="tiles/piso1.bmp" />
+                     </div>
+                     <div class="tile">
+                     <img src="tiles/piso2.bmp" />
+                     </div>
+                     <div class="tile">
+                     <img src="tiles/piramide1.bmp" />
+                     </div>
+                     <div class="tile">
+                     <img src="tiles/piramide2.bmp" />
+                     </div>
+                     <div class="tile">
+                     <img src="tiles/piramide3.bmp" />
+                     </div>
+                     <div class="tile">
+                     <img src="tiles/palmera1.bmp" />
+                     </div>
+                     <div class="tile">
+                     <img src="tiles/palmera2.bmp" />
+                     </div>
              </div>
+            <div class="outputBox">
+                <h2 class="moduleHeader">THE OUTPUT</h2>
+                <div id="theOutPut"></div>
+            </div>
         </body>
         <script>
             window.addEventListener("DOMContentLoaded", function() {
