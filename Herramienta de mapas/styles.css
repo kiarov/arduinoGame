@@ -80,6 +80,13 @@ button {
     color: white;
 }
 /***************************TILE IMAGES*/
+.tile-null {
+    float:left;
+    margin-right: 1px;
+    width: 26px;
+    height: 26px;
+    background: white;
+}
 .tile-1 {
     background-image: url(tiles/piso1.bmp);
     background-size: cover;
@@ -100,11 +107,11 @@ button {
     background-image: url(tiles/piramide3.bmp);
     background-size: cover;
 }
-.tile-6 {
+.tile-7 {
     background-image: url(tiles/palmera1.bmp);
     background-size: cover;
 }
-.tile-7 {
+.tile-6 {
     background-image: url(tiles/palmera2.bmp);
     background-size: cover;
 }

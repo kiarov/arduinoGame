@@ -4,10 +4,13 @@ var map = [
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-  [0,3,4,0,0,0,0,0,7,0,0,0,0,0,0,0],
-  [3,5,5,4,0,3,4,0,6,0,0,0,0,3,4,0],
+  [0,3,4,0,0,0,0,0,6,0,0,0,0,0,0,0],
+  [3,5,5,4,0,3,4,0,7,0,0,0,0,3,4,0],
   [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 ];
+
+var newtileidx = null;
+
 var row = function(node){
     var gridElement = document.getElementsByClassName("grid");
     var div = document.createElement("div");
@@ -68,7 +71,25 @@ var removeColumn = function() {
     gridElement[0].innerHTML = "";
     start();
 }
+var replaceTile = function(y, x) {
+    var gridElement = document.getElementsByClassName("grid");
+    var selectedtileidx = map[y][x];
+    var newmap = map;
+    if (newtileidx && newtileidx != selectedtileidx) {
+        newmap[y][x] = newtileidx;
+        map = newmap;
+        document.getElementById('theOutPut').innerHTML = "";
+        gridElement[0].innerHTML = "";
+        start();
+    }
+}
 var readTile = function(tile) {
     document.getElementById('selected').innerHTML = 'Selected Tile: '+ tile;
-    console.log();
+    var ytile = tile.split('-')[0];
+    var xtile = tile.split('-')[1];
+    replaceTile(ytile, xtile);
+}
+var chooseTile = function(idx) {
+    newtileidx = idx;
+    console.log(newtileidx)
 }

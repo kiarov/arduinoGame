@@ -11,6 +11,7 @@ const int buttonPin = 16;
 const int buttonPin2 = 14;
 int buttonState = 0;         // variable for reading the pushbutton status
 int button2State = 0;
+int drawArea = 0;
 int mapX = 0;
 unsigned char currentTile[8];
 
@@ -26,7 +27,7 @@ void setup() {
   display.setTextColor(INVERSE);
   int TileMap;
   int ypos;
-  Serial.begin(9600);
+  //Serial.begin(9600);
 }
 
 void loop() {
@@ -38,20 +39,23 @@ void loop() {
   button2State = digitalRead(buttonPin2);
 
   if (buttonState == LOW) {
-    mapX += 8;
+    drawArea = 8;
   }
   if (button2State == LOW && mapX > 0) {
     mapX -= 8;
   }
+  display.setCursor(0, 0);
+  display.print(drawArea);
   display.display();
 
 }
 
 void printArray( const int a[][ columns ] ) {
+
   // loop through array's rows
   for ( int i = 0; i < rows; ++i ) {
     // loop through columns of current row
-    for ( int j = 0; j < columns; ++j ) {
+    for ( int j = 0; j < rows; ++j ) {
       // c equals current cell value
       int c = a[i][j];
       if (c > 0) {
@@ -62,8 +66,10 @@ void printArray( const int a[][ columns ] ) {
           currentTile[arrayindex] = TileSet[target + arrayindex];
           Serial.println(arrayindex);
         }
-        display.drawBitmap(j * 8 - mapX, i * 8,  currentTile, 8, 8, 0);
+        display.drawBitmap(j * 8, i * 8,  currentTile, 8, 8, 0);
+//        display.drawBitmap(j * 8 - mapX, i * 8,  currentTile, 8, 8, 0);
       }
     }
   }
 }
+
