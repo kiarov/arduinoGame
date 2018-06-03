@@ -93,3 +93,10 @@ var chooseTile = function(idx) {
     newtileidx = idx;
     console.log(newtileidx)
 }
+
+
+
+inicial = mouseMap (0, 0);
+
+limDerecho = mouseMap (800, 0);
+limInferior = mouseMap (0, 600);
