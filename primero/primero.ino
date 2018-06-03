@@ -11,9 +11,11 @@ const int buttonPin = 16;
 const int buttonPin2 = 14;
 int buttonState = 0;         // variable for reading the pushbutton status
 int button2State = 0;
-int drawArea = 0;
-int mapX = 0;
-unsigned char currentTile[8];
+int screenX = 0;      // the fisical position where we start drawing the screen
+int screenStart = 0;  //first column from the tilemap we want to draw on screen
+int screenEnd = 17;   //last column from the tilemap we want to draw on screen
+int scrollArea = 128; // basically the width of the 1306 display
+int scrollDifference = 0;  //the ammount of columns we have to draw at each screen refresh
 
 void setup() {
   pinMode(13, OUTPUT);
@@ -26,50 +28,70 @@ void setup() {
   display.setCursor(0, 0);
   display.setTextColor(INVERSE);
   int TileMap;
-  int ypos;
   //Serial.begin(9600);
 }
 
 void loop() {
 
   display.clearDisplay();
-  display.fillScreen(1);
-  printArray(TileMap);
+  display.fillScreen(1); //We fill the screen with white so we could draw our objects in black
+  
+  scrollDifference = (screenX / 8); // we must update this value everytime
   buttonState = digitalRead(buttonPin);
   button2State = digitalRead(buttonPin2);
 
-  if (buttonState == LOW) {
-    drawArea = 8;
+  if (buttonState == LOW && screenX < screenWidth - 120) {
+    screenX += 4;
+    if (screenStart < columns - 15) {
+      screenStart = scrollDifference;
+    }
+    if (screenEnd < columns) {
+      screenEnd = scrollDifference + 17;
+    }
   }
-  if (button2State == LOW && mapX > 0) {
-    mapX -= 8;
+  if (button2State == LOW && screenX > 0) {
+    screenX -= 4; //cant be higher than columns -16
+    if (screenStart - scrollDifference > 0) {
+      if (screenX <= 0 ) {
+        screenX = 0;
+        screenStart = 0;
+      }
+      screenStart = scrollDifference;
+    }
+    if (scrollDifference + 17 <= columns) {
+      screenEnd = scrollDifference + 17;
+    }
   }
-  display.setCursor(0, 0);
-  display.print(drawArea);
+  printArray(TileMap);
+  display.setCursor(3, 3);
+  display.print(screenWidth);
+  display.print(":");
+  display.print(screenX);
+  display.print(":");
+  display.print(scrollDifference);
+  display.print(":");
+  display.print(screenStart);
+  display.print(":");
+  display.print(screenEnd);
+  display.print(":");
+  display.print(screenEnd + scrollDifference);
   display.display();
 
-}
+};
 
-void printArray( const int a[][ columns ] ) {
 
+void printArray( const int a[][columns] ) {
   // loop through array's rows
   for ( int i = 0; i < rows; ++i ) {
     // loop through columns of current row
-    for ( int j = 0; j < rows; ++j ) {
+    for ( int j = screenStart ; j < screenEnd; ++j ) {
       // c equals current cell value
       int c = a[i][j];
       if (c > 0) {
         int newc = c - 1;
-        int target = newc * 8;
-        //loop through tile array
-        for ( int arrayindex = 0; arrayindex < 8; ++arrayindex ) {
-          currentTile[arrayindex] = TileSet[target + arrayindex];
-          Serial.println(arrayindex);
-        }
-        display.drawBitmap(j * 8, i * 8,  currentTile, 8, 8, 0);
-//        display.drawBitmap(j * 8 - mapX, i * 8,  currentTile, 8, 8, 0);
+        display.drawBitmap(j * 8 - screenX, i * 8,  TileSet[newc], 8, 8, 0);
       }
+
     }
   }
 }
-

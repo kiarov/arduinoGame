@@ -80,13 +80,6 @@ button {
     color: white;
 }
 /***************************TILE IMAGES*/
-.tile-null {
-    float:left;
-    margin-right: 1px;
-    width: 26px;
-    height: 26px;
-    background: white;
-}
 .tile-1 {
     background-image: url(tiles/piso1.bmp);
     background-size: cover;
